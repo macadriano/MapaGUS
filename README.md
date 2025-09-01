@@ -5,6 +5,7 @@ Un sistema simple para mostrar vehículos en un mapa en tiempo real usando Foliu
 ## Características
 
 - ✅ Muestra vehículos en un mapa interactivo
+- ✅ **Múltiples capas de mapa**: OpenStreetMap, Google Satélite, Google Calles, Google Terreno
 - ✅ Iconos de vehículos con tooltips informativos
 - ✅ Labels con ID del equipo GPS
 - ✅ Actualización automática cada 20 segundos (configurable)
@@ -77,6 +78,14 @@ python start_tracker.py
 
 Este script te permite elegir entre modo local o servidor web de forma interactiva.
 
+### Probar Capas de Google
+
+```bash
+python test_layers.py
+```
+
+Este script crea un mapa de prueba con todas las capas disponibles para verificar su funcionamiento.
+
 ## Estructura del Archivo CSV
 
 El archivo `positions_log.csv` debe tener la siguiente estructura:
@@ -110,7 +119,36 @@ SERVER_PORT = 5000
 
 # Configuración del mapa
 MAP_ZOOM_START = 12
+
+# URLs de las capas de Google
+GOOGLE_SATELLITE_URL = 'https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'
+GOOGLE_STREETS_URL = 'https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}'
+GOOGLE_TERRAIN_URL = 'https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}'
 ```
+
+## Capas de Mapa Disponibles
+
+El rastreador incluye múltiples capas de mapa para diferentes necesidades:
+
+- **OpenStreetMap** (por defecto): Mapa de calles estándar, gratuito y detallado
+- **Google Satélite**: Vista aérea de alta resolución con imágenes satelitales
+- **Google Calles**: Mapa de calles de Google con información detallada
+- **Google Terreno**: Mapa topográfico con relieve y características del terreno
+
+### Cambiar Capa de Mapa
+
+Para cambiar la capa de mapa por defecto, edita el archivo `vehicle_tracker.py`:
+
+```python
+# Cambiar la capa por defecto
+m = folium.Map(
+    location=self.map_center,
+    zoom_start=12,
+    tiles='https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'  # Google Satélite
+)
+```
+
+> **⚠️ Nota importante**: Las capas de Google están disponibles para uso personal y de desarrollo. Para uso comercial o en producción, asegúrate de cumplir con los términos de servicio de Google Maps y considerar el uso de la API oficial de Google Maps.
 
 ## Publicación en Producción
 

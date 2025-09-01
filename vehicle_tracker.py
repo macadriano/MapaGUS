@@ -84,6 +84,30 @@ class VehicleTracker:
             tiles='OpenStreetMap'
         )
         
+        # Agregar capa de satélite de Google
+        folium.TileLayer(
+            tiles='https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
+            attr='Google Satellite',
+            name='Satélite Google',
+            overlay=False
+        ).add_to(m)
+        
+        # Agregar capa de calles de Google
+        folium.TileLayer(
+            tiles='https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+            attr='Google Streets',
+            name='Calles Google',
+            overlay=False
+        ).add_to(m)
+        
+        # Agregar capa de terreno de Google
+        folium.TileLayer(
+            tiles='https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',
+            attr='Google Terrain',
+            name='Terreno Google',
+            overlay=False
+        ).add_to(m)
+        
         # Agregar cada vehículo al mapa
         for vehicle_id, data in vehicles_data.items():
             # Crear icono personalizado para el vehículo
