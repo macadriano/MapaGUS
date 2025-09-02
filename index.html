@@ -1,16 +1,219 @@
 <style>
-  .rojo { color: #e11; }
-  .verde {
-  color: rgb(72, 199, 72);
-  background-color: #ff0; }
-  .bg-azul { background-color: #0af; }
-  a { color: #06c; }           /* link normal */
-  a:hover { color: #c00; }     /* link al pasar el mouse */
-</style>
-<h1 class="rojo">hola corneta como te va</h1>
-<!--<h2 class="bg-azul">NO</h2>
-<h3 class="rojo">SI</h3>
-<h4 class="bg-azul">TAL VEZ</h4>
-<h5 class="rojo">MAS TARDE</h5>
-<h6 class="bg-azul">AHORA NO</h6>>-->
-<img src="randall.gif" width="800" height="533">
+    .rojo { color: #e11; }
+    .verde {
+    color: rgb(72, 199, 72);
+    background-color: #ff0; }
+    .bg-azul { background-color: #0af; }
+    a { color: #06c; }           /* link normal */
+    a:hover { color: #c00; }     /* link al pasar el mouse */
+  </style>
+  <!--<h1 class="rojo">hola corneta como te va</h1>
+  <h2 class="bg-azul">NO</h2>
+  <h3 class="rojo">SI</h3>
+  <h4 class="bg-azul">TAL VEZ</h4>
+  <h5 class="rojo">MAS TARDE</h5>
+  <h6 class="bg-azul">AHORA NO</h6>
+  <img src="randall.gif" width="800" height="533">-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dibujar Cuadrado</title>
+    <style>
+        .rojo { color: #e11; }
+        .verde {
+            color: rgb(72, 199, 72);
+            background-color: #ff0; 
+        }
+        .bg-azul { background-color: #0af; }
+        a { color: #06c; }           /* link normal */
+        a:hover { color: #c00; }     /* link al pasar el mouse */
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        canvas {
+            border: 2px solid #333;
+            border-radius: 5px;
+            display: block;
+            margin: 20px auto;
+            background-color: #f8f8f8;
+        }
+        
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .info {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Dibujar Cuadrado</h1>
+        
+        <div class="info">
+            <p><strong>Instrucciones:</strong> Usa los botones para dibujar diferentes tipos de cuadrados en el canvas.</p>
+        </div>
+        
+        <canvas id="myCanvas" width="600" height="400"></canvas>
+        
+        <div class="controls">
+            <button onclick="drawSquare()">🟦 Dibujar Cuadrado</button>
+            <button onclick="drawColoredSquare()">🎨 Cuadrado de Colores</button>
+            <button onclick="drawGradientSquare()">🌈 Cuadrado con Gradiente</button>
+            <button onclick="clearCanvas()">🧹 Limpiar Canvas</button>
+        </div>
+        
+        <div class="info">
+            <h3>Características del cuadrado:</h3>
+            <ul>
+                <li><span class="rojo">Posición:</span> Centro del canvas</li>
+                <li><span class="verde">Tamaño:</span> 100x100 píxeles</li>
+                <li><span class="bg-azul">Estilo:</span> Diferentes variaciones</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Función para dibujar un cuadrado básico
+        function drawSquare() {
+            // Limpiar canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Configurar el estilo del cuadrado
+            ctx.fillStyle = '#2196F3';
+            ctx.strokeStyle = '#1976D2';
+            ctx.lineWidth = 3;
+            
+            // Calcular posición centrada
+            const x = (canvas.width - 100) / 2;
+            const y = (canvas.height - 100) / 2;
+            
+            // Dibujar el cuadrado
+            ctx.fillRect(x, y, 100, 100);
+            ctx.strokeRect(x, y, 100, 100);
+            
+            // Agregar texto
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('CUADRADO', x + 50, y + 55);
+        }
+        
+        // Función para dibujar un cuadrado con colores
+        function drawColoredSquare() {
+            // Limpiar canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Calcular posición centrada
+            const x = (canvas.width - 100) / 2;
+            const y = (canvas.height - 100) / 2;
+            
+            // Dibujar múltiples cuadrados con diferentes colores
+            const colors = ['#FF5722', '#4CAF50', '#FFC107', '#9C27B0', '#00BCD4'];
+            
+            for (let i = 0; i < 5; i++) {
+                ctx.fillStyle = colors[i];
+                ctx.fillRect(x + i * 5, y + i * 5, 100 - i * 10, 100 - i * 10);
+            }
+            
+            // Agregar texto
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('COLORES', x + 50, y + 55);
+        }
+        
+        // Función para dibujar un cuadrado con gradiente
+        function drawGradientSquare() {
+            // Limpiar canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Calcular posición centrada
+            const x = (canvas.width - 100) / 2;
+            const y = (canvas.height - 100) / 2;
+            
+            // Crear gradiente
+            const gradient = ctx.createLinearGradient(x, y, x + 100, y + 100);
+            gradient.addColorStop(0, '#FF6B6B');
+            gradient.addColorStop(0.5, '#4ECDC4');
+            gradient.addColorStop(1, '#45B7D1');
+            
+            // Dibujar cuadrado con gradiente
+            ctx.fillStyle = gradient;
+            ctx.fillRect(x, y, 100, 100);
+            
+            // Agregar borde
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x, y, 100, 100);
+            
+            // Agregar texto
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('GRADIENTE', x + 50, y + 55);
+        }
+        
+        // Función para limpiar el canvas
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Agregar mensaje
+            ctx.fillStyle = '#666';
+            ctx.font = '20px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Canvas limpiado', canvas.width / 2, canvas.height / 2);
+        }
+        
+        // Dibujar un cuadrado inicial cuando se carga la página
+        window.onload = function() {
+            drawSquare();
+        };
+    </script>
+</body>
+</html>
